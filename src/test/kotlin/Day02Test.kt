@@ -53,10 +53,10 @@ class Day02Test : FreeSpec({
 
     "solution" - {
 
-        "part 1" {
-            // given
-            val elvesList = getResourceFileAsStringSequence("day02/input.txt")
+        // given
+        val elvesList = getResourceFileAsStringSequence("day02/input.txt")
 
+        "part 1" {
             // when
             val totalWrappingPaper = Day02().getTotalWrappingPaper(elvesList)
 
@@ -65,9 +65,6 @@ class Day02Test : FreeSpec({
         }
 
         "part 2" {
-            // given
-            val elvesList = getResourceFileAsStringSequence("day02/input.txt")
-
             // when
             val totalRibbonLength = Day02().getTotalRibbonLength(elvesList)
 

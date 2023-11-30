@@ -1,12 +1,10 @@
 class Day02 {
     fun getTotalWrappingPaper(elvesList: List<String>): Int {
-        return readElvesList(elvesList).map { it.neededWrappingPaper() }
-            .sum()
+        return readElvesList(elvesList).sumOf { it.neededWrappingPaper() }
     }
 
     fun getTotalRibbonLength(elvesList: List<String>): Int {
-        return readElvesList(elvesList).map { it.totalFeetOfRibbon() }
-            .sum()
+        return readElvesList(elvesList).sumOf { it.totalFeetOfRibbon() }
     }
 
     fun readElvesList(elvesList: List<String>): List<Present> {
@@ -37,7 +35,7 @@ data class Present(val length: Int, val width: Int, val height: Int) {
         return ribbonLength + volume()
     }
 
-    fun volume(): Int {
+    private fun volume(): Int {
         return length * width * height
     }
 
