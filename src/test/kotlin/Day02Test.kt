@@ -10,6 +10,11 @@ class Day02Test : FreeSpec({
             Present(1, 1, 10).neededWrappingPaper() shouldBe 43
         }
 
+        "present feet of ribbon" {
+            Present(2, 3, 4).totalFeetOfRibbon() shouldBe 34
+            Present(1, 1, 10).totalFeetOfRibbon() shouldBe 14
+        }
+
         "read elves list" {
             // given
             val elvesList = listOf("2x3x4","1x1x10")
@@ -34,6 +39,16 @@ class Day02Test : FreeSpec({
             totalWrappingPaper shouldBe 101
         }
 
+        "part 2 - total ribbon length" - {
+            // given
+            val elvesList = listOf("2x3x4","1x1x10")
+
+            // when
+            val totalRibbonLength = Day02().getTotalRibbonLength(elvesList)
+
+            // then
+            totalRibbonLength shouldBe 48
+        }
     }
 
     "solution" - {
@@ -50,7 +65,14 @@ class Day02Test : FreeSpec({
         }
 
         "part 2" {
+            // given
+            val elvesList = getResourceFileAsStringSequence("day02/input.txt")
 
+            // when
+            val totalRibbonLength = Day02().getTotalRibbonLength(elvesList)
+
+            // then
+            totalRibbonLength shouldBe 3783758
         }
     }
 }) {

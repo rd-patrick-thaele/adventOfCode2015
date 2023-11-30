@@ -4,6 +4,11 @@ class Day02 {
             .sum()
     }
 
+    fun getTotalRibbonLength(elvesList: List<String>): Int {
+        return readElvesList(elvesList).map { it.totalFeetOfRibbon() }
+            .sum()
+    }
+
     fun readElvesList(elvesList: List<String>): List<Present> {
         val boxRegex = "([0-9]+)x([0-9]+)x([0-9]+)".toRegex()
 
@@ -23,6 +28,17 @@ data class Present(val length: Int, val width: Int, val height: Int) {
         val slackMaterial = listOf(area1, area2, area3).min()
 
         return 2 * area1 + 2 * area2 + 2 * area3 + slackMaterial
+    }
+
+    fun totalFeetOfRibbon(): Int {
+        val sortedDimensions = listOf(length, width, height).sorted()
+        val ribbonLength = sortedDimensions.first() * 2 + sortedDimensions[1] * 2
+
+        return ribbonLength + volume()
+    }
+
+    fun volume(): Int {
+        return length * width * height
     }
 
 }
