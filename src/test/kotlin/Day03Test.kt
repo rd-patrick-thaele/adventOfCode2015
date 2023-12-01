@@ -95,8 +95,14 @@ class Day03Test : FreeSpec({
         }
 
         "part 2" {
-            // when
+            // given
+            val day03 = Day03()
 
+            // when
+            day03.deliverPresentsWithRoboSantaViaCommands(commands)
+
+            // then
+            day03.getNbOfHousesDelivered() shouldBe 2631
         }
     }
 }) {

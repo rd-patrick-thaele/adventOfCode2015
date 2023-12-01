@@ -8,6 +8,7 @@ class Day03 {
     }
 
     private var currentLocation = Coordinate(0,0)
+    private var currentLocationRobot = Coordinate(0,0)
     private val visitedHouses = mutableSetOf<Coordinate>()
 
     fun deliverPresentsViaCommands(commands: String) {
@@ -34,7 +35,21 @@ class Day03 {
     }
 
     fun deliverPresentsWithRoboSantaViaCommands(commands: String) {
-        TODO("Not yet implemented")
+        var isRobot = false
+
+        visitedHouses.add(currentLocation)
+
+        for (command in commands) {
+            if (isRobot)
+                currentLocationRobot = move(command, currentLocationRobot)
+            else
+                currentLocation = move(command, currentLocation)
+
+            isRobot = !isRobot
+
+            visitedHouses.add(currentLocation)
+            visitedHouses.add(currentLocationRobot)
+        }
     }
 }
 
