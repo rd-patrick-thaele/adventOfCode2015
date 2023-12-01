@@ -28,6 +28,10 @@ class Day03 {
     fun getNbOfHousesDelivered(): Int {
         return visitedHouses.size
     }
+
+    fun deliverPresentsWithRoboSantaViaCommands(commands: String) {
+        TODO("Not yet implemented")
+    }
 }
 
 typealias Coordinate = Pair<Int, Int>

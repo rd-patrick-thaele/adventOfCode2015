@@ -40,6 +40,42 @@ class Day03Test : FreeSpec({
             // then
             day03.getNbOfHousesDelivered() shouldBe 2
         }
+
+        "deliver presents with roboSanta - one each" {
+            // given
+            val day03 = Day03()
+            val commands = "^v"
+
+            // when
+            day03.deliverPresentsWithRoboSantaViaCommands(commands)
+
+            // then
+            day03.getNbOfHousesDelivered() shouldBe 3
+        }
+
+        "deliver presents with roboSanta - no circle anymore" {
+            // given
+            val day03 = Day03()
+            val commands = "^>v<"
+
+            // when
+            day03.deliverPresentsWithRoboSantaViaCommands(commands)
+
+            // then
+            day03.getNbOfHousesDelivered() shouldBe 3
+        }
+
+        "deliver presents with roboSanta - moving in different directions" {
+            // given
+            val day03 = Day03()
+            val commands = "^v^v^v^v^v"
+
+            // when
+            day03.deliverPresentsWithRoboSantaViaCommands(commands)
+
+            // then
+            day03.getNbOfHousesDelivered() shouldBe 11
+        }
     }
 
     "solution" - {
