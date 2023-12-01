@@ -14,14 +14,18 @@ class Day03 {
         visitedHouses.add(currentLocation)
 
         for (command in commands) {
-            when (command) {
-                GO_EAST -> currentLocation = Coordinate(currentLocation.first + 1, currentLocation.second)
-                GO_SOUTH -> currentLocation = Coordinate(currentLocation.first, currentLocation.second - 1)
-                GO_WEST -> currentLocation = Coordinate(currentLocation.first - 1, currentLocation.second)
-                GO_NORTH -> currentLocation = Coordinate(currentLocation.first, currentLocation.second + 1)
-            }
-
+            currentLocation = move(command, currentLocation)
             visitedHouses.add(currentLocation)
+        }
+    }
+
+    private fun move(command: Char, currentLocation: Coordinate): Coordinate{
+        return when (command) {
+            GO_EAST -> Coordinate(currentLocation.first + 1, currentLocation.second)
+            GO_SOUTH -> Coordinate(currentLocation.first, currentLocation.second - 1)
+            GO_WEST -> Coordinate(currentLocation.first - 1, currentLocation.second)
+            GO_NORTH -> Coordinate(currentLocation.first, currentLocation.second + 1)
+            else -> Coordinate(0,0)
         }
     }
 
