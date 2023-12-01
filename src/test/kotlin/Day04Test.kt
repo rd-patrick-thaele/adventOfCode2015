@@ -40,7 +40,11 @@ class Day04Test : FreeSpec({
         }
 
         "part 2" {
-            // given
+            // when
+            val seed = Day04().mineAdventCoins("ckczppom", 6)
+
+            // then
+            seed shouldBe 3938038
 
         }
     }
