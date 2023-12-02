@@ -1,7 +1,7 @@
 class Day06 {
 
     private val instructionRegex = "(turn on|toggle|turn off) ([0-9]+),([0-9]+) through ([0-9]+),([0-9]+)".toRegex()
-    private val lightGrid = Array(1000) { i -> Array(1000) { j -> false } }
+    private val lightGrid = Array(1000) { i -> Array(1000) { j -> 0 } }
 
     fun countLitLightsAfterInstructions(instructions: List<String>): Int {
         instructions.map { parseInstruction(it) }
@@ -21,9 +21,9 @@ class Day06 {
             for (y in instruction.y1..instruction.y2) {
 
                 when (instruction.action) {
-                    "turn on" -> lightGrid[x][y] = true
-                    "turn off" -> lightGrid[x][y] = false
-                    "toggle" -> lightGrid[x][y] = !lightGrid[x][y]
+                    "turn on" -> lightGrid[x][y] = 1
+                    "turn off" -> lightGrid[x][y] = 0
+                    "toggle" -> lightGrid[x][y] = if (lightGrid[x][y] == 0) 1 else 0
                 }
 
             }
@@ -35,7 +35,7 @@ class Day06 {
 
         for (column in lightGrid) {
             for (row in column) {
-                if (row) countOfLitLights++
+                if (row > 0) countOfLitLights++
             }
         }
 
