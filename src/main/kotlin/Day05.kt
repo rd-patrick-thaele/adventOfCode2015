@@ -12,7 +12,7 @@ class Day05 {
 
         for (char in stringInLetter) {
             if (vowels.contains(char))
-                vowelsCount ++
+                vowelsCount++
 
             if (prevChar == char)
                 doubleCharExists = true
@@ -27,5 +27,38 @@ class Day05 {
             return false
 
         return doubleCharExists
+    }
+
+    fun countNiceStringsV2(letter: List<String>): Int {
+        return letter.count { isNiceStringV2(it) }
+    }
+
+    fun isNiceStringV2(stringInLetter: String): Boolean {
+        var prevChar = '_'
+        var prevPrevChar = '_'
+        var hasDoubleSingle = false
+
+        val foundDoubles = mutableSetOf<String>()
+        var hasDoublePair = false
+
+        for (char in stringInLetter) {
+            if (prevPrevChar == char)
+                hasDoubleSingle = true
+
+            val lastTwoCharsCombined = prevChar.toString() + char
+            val pastCharsCombined = prevPrevChar.toString() + prevChar
+
+            if (foundDoubles.contains(lastTwoCharsCombined)) {
+                hasDoublePair = true
+            }
+
+            // wait one turn before pair is added to the cache to prevent false positives due to overlapping
+            foundDoubles.add(pastCharsCombined)
+
+            prevPrevChar = prevChar
+            prevChar = char
+        }
+
+        return hasDoubleSingle && hasDoublePair
     }
 }
