@@ -41,6 +41,39 @@ class Day06 {
 
         return countOfLitLights
     }
+
+    fun getTotalBrightnessAfterInstructions(instructions: List<String>): Int {
+        instructions.map { parseInstruction(it) }
+            .forEach { applyBrighness(it) }
+
+        return getTotalBrightness()
+    }
+
+    private fun applyBrighness(instruction: Instruction) {
+        for (x in instruction.x1..instruction.x2) {
+            for (y in instruction.y1..instruction.y2) {
+
+                when (instruction.action) {
+                    "turn on" -> lightGrid[x][y]++
+                    "turn off" -> lightGrid[x][y] = if (lightGrid[x][y] == 0) 0 else lightGrid[x][y] - 1
+                    "toggle" -> lightGrid[x][y] += 2
+                }
+
+            }
+        }
+    }
+
+    private fun getTotalBrightness(): Int {
+        var totalBrightness = 0
+
+        for (column in lightGrid) {
+            for (row in column) {
+                totalBrightness += row
+            }
+        }
+
+        return totalBrightness
+    }
 }
 
 data class Instruction(val action: String, val x1: Int, val y1: Int, val x2: Int, val y2: Int)

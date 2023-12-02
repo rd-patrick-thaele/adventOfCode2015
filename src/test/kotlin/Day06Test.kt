@@ -12,7 +12,7 @@ class Day06Test : FreeSpec({
             val parsed = Day06().parseInstruction(instruction)
 
             // then
-            parsed shouldBe Instruction("turn on", 0,0,999,999)
+            parsed shouldBe Instruction("turn on", 0, 0, 999, 999)
         }
 
         "parseInstruction - toggle" {
@@ -23,7 +23,7 @@ class Day06Test : FreeSpec({
             val parsed = Day06().parseInstruction(instruction)
 
             // then
-            parsed shouldBe Instruction("toggle", 0,0,999,0)
+            parsed shouldBe Instruction("toggle", 0, 0, 999, 0)
         }
 
         "parseInstruction - turn off" {
@@ -34,7 +34,7 @@ class Day06Test : FreeSpec({
             val parsed = Day06().parseInstruction(instruction)
 
             // then
-            parsed shouldBe Instruction("turn off", 499,498,501,500)
+            parsed shouldBe Instruction("turn off", 499, 498, 501, 500)
         }
 
         "countLitLights" {
@@ -83,13 +83,54 @@ class Day06Test : FreeSpec({
             // then
             nbOfLitLights shouldBe 998_002
         }
+
+        "getTotalBrightnessAfterInstructions - turn on" {
+            // given
+            val instructions = """
+                turn on 0,0 through 0,0
+            """.trimIndent().lineSequence().toList()
+
+            // when
+            val totalBrightness = Day06().getTotalBrightnessAfterInstructions(instructions)
+
+            // then
+            totalBrightness shouldBe 1
+        }
+
+        "getTotalBrightnessAfterInstructions - toggle" {
+            // given
+            val instructions = """
+                toggle 0,0 through 999,999
+            """.trimIndent().lineSequence().toList()
+
+            // when
+            val totalBrightness = Day06().getTotalBrightnessAfterInstructions(instructions)
+
+            // then
+            totalBrightness shouldBe 2_000_000
+        }
+
+        "getTotalBrightnessAfterInstructions - turn off" {
+            // given
+            val instructions = """
+                turn on 0,0 through 0,0
+                turn off 0,0 through 0,1
+            """.trimIndent().lineSequence().toList()
+
+            // when
+            val totalBrightness = Day06().getTotalBrightnessAfterInstructions(instructions)
+
+            // then
+            totalBrightness shouldBe 0
+        }
     }
 
     "solution" - {
+        // given
+        val instructions = getResourceFileAsStringSequence("day06/input.txt")
 
         "part 1" {
-            // given
-            val instructions = getResourceFileAsStringSequence("day06/input.txt")
+
 
             // when
             val nbOfLitLights = Day06().countLitLightsAfterInstructions(instructions)
@@ -99,7 +140,11 @@ class Day06Test : FreeSpec({
         }
 
         "part 2" {
+            // when
+            val totalBrightness = Day06().getTotalBrightnessAfterInstructions(instructions)
 
+            // then
+            totalBrightness shouldBe 15_343_601
         }
     }
 }) {
